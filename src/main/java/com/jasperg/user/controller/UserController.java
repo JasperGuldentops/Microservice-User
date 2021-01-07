@@ -68,7 +68,7 @@ public class UserController {
         return user;
     }
 
-    @DeleteMapping("/users/code/{code}")
+    @DeleteMapping("/users/{code}")
     public ResponseEntity deleteUser(@PathVariable String code){
         User user = userRepository.findUserByCode(code);
         if(user!=null){

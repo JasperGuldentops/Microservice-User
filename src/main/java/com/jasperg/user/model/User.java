@@ -34,7 +34,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.code = email + codeString;
+        this.code = email + "-" + codeString;
     }
 
     public String getFirstName() {
@@ -66,6 +66,6 @@ public class User {
     }
 
     public void setCode(String email) {
-        this.code = email + Helper.getRandomString(4);
+        this.code = email + "-" + Helper.getRandomString(4);
     }
 }
