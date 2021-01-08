@@ -28,21 +28,25 @@ public class UserController {
 
     @GetMapping("/users")
     public List<User> getUsers() {
+
         return userRepository.findAll();
     }
 
     @GetMapping("/users/email/{email}")
     public List<User> getUsersByEmail(@PathVariable String email) {
+
         return userRepository.findUsersByEmailContaining(email);
     }
 
     @GetMapping("/users/name/{name}")
     public List<User> getUsersByName(@PathVariable String name) {
+
         return userRepository.findUsersByFirstNameContainingOrLastNameContaining(name, name);
     }
 
-    @GetMapping("/user/code/{code}")
+    @GetMapping("/users/code/{code}")
     public User getUserByCode(@PathVariable String code) {
+
         return userRepository.findUserByCode(code);
     }
 
