@@ -27,7 +27,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        setCode(email);
+        this.code = email + "-" + Helper.getRandomString(4);
     }
 
     public User(String firstName, String lastName, String email, String codeString) {
@@ -65,7 +65,7 @@ public class User {
         return code;
     }
 
-    public void setCode(String email) {
-        this.code = email + "-" + Helper.getRandomString(4);
+    public void setCode(String code) {
+        this.code = code;
     }
 }
