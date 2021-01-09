@@ -53,9 +53,11 @@ public class UserController {
     @PostMapping("/users")
     public User addUser(@RequestBody User user){
 
-        userRepository.save(user);
+        User newUser = new User(user.getFirstName(), user.getLastName(), user.getEmail());
 
-        return user;
+        userRepository.save(newUser);
+
+        return newUser;
     }
 
     @PutMapping("/users")

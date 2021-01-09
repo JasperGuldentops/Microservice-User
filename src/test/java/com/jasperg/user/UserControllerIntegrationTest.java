@@ -156,7 +156,7 @@ public class UserControllerIntegrationTest {
     @Test
     public void whenPostUser_thenReturnJsonUser() throws Exception {
 
-        User newUser = new User("Dirk", "Dekkers", "dd@gmail.be", "dd@gmail.be-0000");
+        User newUser = new User("Dirk", "Dekkers", "dd@gmail.be");
 
         mockMvc.perform(post("/users")
                 .content(mapper.writeValueAsString(newUser))
@@ -166,8 +166,8 @@ public class UserControllerIntegrationTest {
 
                 .andExpect(jsonPath("$.firstName", is("Dirk")))
                 .andExpect(jsonPath("$.lastName", is("Dekkers")))
-                .andExpect(jsonPath("$.email", is("dd@gmail.be")))
-                .andExpect(jsonPath("$.code", is("dd@gmail.be-0000")));
+                .andExpect(jsonPath("$.email", is("dd@gmail.be")));
+                //.andExpect(jsonPath("$.code", is("dd@gmail.be-0000"))); Can't check for code since it's generated on post
     }
 
     @Test
