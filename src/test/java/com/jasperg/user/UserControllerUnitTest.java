@@ -35,8 +35,10 @@ public class UserControllerUnitTest {
     @Test
     public void givenUser_whenGetAllUsers_thenReturnJsonUsers() throws Exception {
 
-        User user1 = new User("Jasper", "Guldentops", "jg@gmail.com", "jg@gmail.com-0000");
-        User user2 = new User("Andre", "Arboon", "aa@gmail.com", "aa@gmail.com-0000");
+        User user1 = new User("Jasper", "Guldentops",
+                "jg@gmail.com", "jg@gmail.com-0000");
+        User user2 = new User("Andre", "Arboon",
+                "aa@gmail.com", "aa@gmail.com-0000");
 
         List<User> users = new ArrayList<>();
         users.add(user1);
@@ -48,10 +50,12 @@ public class UserControllerUnitTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
+
                 .andExpect(jsonPath("$[0].firstName", is("Jasper")))
                 .andExpect(jsonPath("$[0].lastName", is("Guldentops")))
                 .andExpect(jsonPath("$[0].email", is("jg@gmail.com")))
                 .andExpect(jsonPath("$[0].code", is("jg@gmail.com-0000")))
+
                 .andExpect(jsonPath("$[1].firstName", is("Andre")))
                 .andExpect(jsonPath("$[1].lastName", is("Arboon")))
                 .andExpect(jsonPath("$[1].email", is("aa@gmail.com")))
@@ -61,8 +65,10 @@ public class UserControllerUnitTest {
     @Test
     public void givenUser_whenGetUsersByEmailContaining_thenReturnJsonUsers() throws Exception {
 
-        User user1 = new User("Jasper", "Guldentops", "jg@gmail.com", "jg@gmail.com-0000");
-        User user2 = new User("Andre", "Arboon", "aa@gmail.com", "aa@gmail.com-0000");
+        User user1 = new User("Jasper", "Guldentops",
+                "jg@gmail.com", "jg@gmail.com-0000");
+        User user2 = new User("Andre", "Arboon",
+                "aa@gmail.com", "aa@gmail.com-0000");
 
         List<User> users = new ArrayList<>();
         users.add(user1);
@@ -74,10 +80,12 @@ public class UserControllerUnitTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
+
                 .andExpect(jsonPath("$[0].firstName", is("Jasper")))
                 .andExpect(jsonPath("$[0].lastName", is("Guldentops")))
                 .andExpect(jsonPath("$[0].email", is("jg@gmail.com")))
                 .andExpect(jsonPath("$[0].code", is("jg@gmail.com-0000")))
+
                 .andExpect(jsonPath("$[1].firstName", is("Andre")))
                 .andExpect(jsonPath("$[1].lastName", is("Arboon")))
                 .andExpect(jsonPath("$[1].email", is("aa@gmail.com")))
@@ -87,8 +95,10 @@ public class UserControllerUnitTest {
     @Test
     public void givenUser_whenGetUsersByNameContaining_thenReturnJsonUsers() throws Exception {
 
-        User user1 = new User("Andre", "Arboon", "aa@gmail.com", "aa@gmail.com-0000");
-        User user2 = new User("Barry", "Bakker", "bb@gmail.be", "bb@gmail.be-0000");
+        User user1 = new User("Andre", "Arboon",
+                "aa@gmail.com", "aa@gmail.com-0000");
+        User user2 = new User("Barry", "Bakker",
+                "bb@gmail.be", "bb@gmail.be-0000");
 
         List<User> users = new ArrayList<>();
         users.add(user1);
@@ -100,10 +110,12 @@ public class UserControllerUnitTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
+
                 .andExpect(jsonPath("$[0].firstName", is("Andre")))
                 .andExpect(jsonPath("$[0].lastName", is("Arboon")))
                 .andExpect(jsonPath("$[0].email", is("aa@gmail.com")))
                 .andExpect(jsonPath("$[0].code", is("aa@gmail.com-0000")))
+
                 .andExpect(jsonPath("$[1].firstName", is("Barry")))
                 .andExpect(jsonPath("$[1].lastName", is("Bakker")))
                 .andExpect(jsonPath("$[1].email", is("bb@gmail.be")))
@@ -111,7 +123,7 @@ public class UserControllerUnitTest {
     }
 
     @Test
-    public void givenUser_whenGetUserByCode_thenReturnJsonIngredient() throws Exception {
+    public void givenUser_whenGetUserByCode_thenReturnJsonUser() throws Exception {
 
         User user = new User("Jasper", "Guldentops", "jg@gmail.com", "jg@gmail.com-0000");
 
@@ -120,6 +132,7 @@ public class UserControllerUnitTest {
         mockMvc.perform(get("/users/code/{code}", "jg@gmail.com-0000"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
+
                 .andExpect(jsonPath("$.firstName", is("Jasper")))
                 .andExpect(jsonPath("$.lastName", is("Guldentops")))
                 .andExpect(jsonPath("$.email", is("jg@gmail.com")))
@@ -136,6 +149,7 @@ public class UserControllerUnitTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
+
                 .andExpect(jsonPath("$.firstName", is("Dirk")))
                 .andExpect(jsonPath("$.lastName", is("Dekkers")))
                 .andExpect(jsonPath("$.email", is("dd@gmail.be")))
@@ -149,13 +163,15 @@ public class UserControllerUnitTest {
 
         given(userRepository.findUserByCode("bb@gmail.be-0000")).willReturn(user);
 
-        User updateUser = new User("Barrie", "Bakkers", "barrieb@gmail.be", "bb@gmail.be-0000");
+        User updateUser = new User("Barrie", "Bakkers",
+                "barrieb@gmail.be", "bb@gmail.be-0000");
 
         mockMvc.perform(put("/users")
                 .content(mapper.writeValueAsString(updateUser))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
+
                 .andExpect(jsonPath("$.firstName", is("Barrie")))
                 .andExpect(jsonPath("$.lastName", is("Bakkers")))
                 .andExpect(jsonPath("$.email", is("barrieb@gmail.be")))

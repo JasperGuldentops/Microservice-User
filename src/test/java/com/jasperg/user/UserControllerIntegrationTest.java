@@ -34,10 +34,14 @@ public class UserControllerIntegrationTest {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-    private User user1 = new User("Jasper", "Guldentops", "jg@gmail.com", "jg@gmail.com-0000");
-    private User user2 = new User("Andre", "Arboon", "aa@gmail.com", "aa@gmail.com-0000");
-    private User userToChange = new User("Barry", "Bakker", "bb@gmail.be", "bb@gmail.be-0000");
-    private User userToDelete = new User("Conny", "Cunters", "cc@gmail.be", "cc@gmail.be-0000");
+    private User user1 = new User("Jasper", "Guldentops",
+            "jg@gmail.com", "jg@gmail.com-0000");
+    private User user2 = new User("Andre", "Arboon",
+            "aa@gmail.com", "aa@gmail.com-0000");
+    private User userToChange = new User("Barry", "Bakker",
+            "bb@gmail.be", "bb@gmail.be-0000");
+    private User userToDelete = new User("Conny", "Cunters",
+            "cc@gmail.be", "cc@gmail.be-0000");
 
     @BeforeEach
     public void beforeAllTests() {
@@ -68,18 +72,22 @@ public class UserControllerIntegrationTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(4)))
+
                 .andExpect(jsonPath("$[0].firstName", is("Jasper")))
                 .andExpect(jsonPath("$[0].lastName", is("Guldentops")))
                 .andExpect(jsonPath("$[0].email", is("jg@gmail.com")))
                 .andExpect(jsonPath("$[0].code", is("jg@gmail.com-0000")))
+
                 .andExpect(jsonPath("$[1].firstName", is("Andre")))
                 .andExpect(jsonPath("$[1].lastName", is("Arboon")))
                 .andExpect(jsonPath("$[1].email", is("aa@gmail.com")))
                 .andExpect(jsonPath("$[1].code", is("aa@gmail.com-0000")))
+
                 .andExpect(jsonPath("$[2].firstName", is("Barry")))
                 .andExpect(jsonPath("$[2].lastName", is("Bakker")))
                 .andExpect(jsonPath("$[2].email", is("bb@gmail.be")))
                 .andExpect(jsonPath("$[2].code", is("bb@gmail.be-0000")))
+
                 .andExpect(jsonPath("$[3].firstName", is("Conny")))
                 .andExpect(jsonPath("$[3].lastName", is("Cunters")))
                 .andExpect(jsonPath("$[3].email", is("cc@gmail.be")))
@@ -97,10 +105,12 @@ public class UserControllerIntegrationTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
+
                 .andExpect(jsonPath("$[0].firstName", is("Jasper")))
                 .andExpect(jsonPath("$[0].lastName", is("Guldentops")))
                 .andExpect(jsonPath("$[0].email", is("jg@gmail.com")))
                 .andExpect(jsonPath("$[0].code", is("jg@gmail.com-0000")))
+
                 .andExpect(jsonPath("$[1].firstName", is("Andre")))
                 .andExpect(jsonPath("$[1].lastName", is("Arboon")))
                 .andExpect(jsonPath("$[1].email", is("aa@gmail.com")))
@@ -118,10 +128,12 @@ public class UserControllerIntegrationTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
+
                 .andExpect(jsonPath("$[0].firstName", is("Andre")))
                 .andExpect(jsonPath("$[0].lastName", is("Arboon")))
                 .andExpect(jsonPath("$[0].email", is("aa@gmail.com")))
                 .andExpect(jsonPath("$[0].code", is("aa@gmail.com-0000")))
+
                 .andExpect(jsonPath("$[1].firstName", is("Barry")))
                 .andExpect(jsonPath("$[1].lastName", is("Bakker")))
                 .andExpect(jsonPath("$[1].email", is("bb@gmail.be")))
@@ -129,11 +141,12 @@ public class UserControllerIntegrationTest {
     }
 
     @Test
-    public void givenUser_whenGetUserByCode_thenReturnJsonIngredient() throws Exception {
+    public void givenUser_whenGetUserByCode_thenReturnJsonUser() throws Exception {
 
         mockMvc.perform(get("/users/code/{code}", "jg@gmail.com-0000"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
+
                 .andExpect(jsonPath("$.firstName", is("Jasper")))
                 .andExpect(jsonPath("$.lastName", is("Guldentops")))
                 .andExpect(jsonPath("$.email", is("jg@gmail.com")))
@@ -150,6 +163,7 @@ public class UserControllerIntegrationTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
+
                 .andExpect(jsonPath("$.firstName", is("Dirk")))
                 .andExpect(jsonPath("$.lastName", is("Dekkers")))
                 .andExpect(jsonPath("$.email", is("dd@gmail.be")))
@@ -159,13 +173,15 @@ public class UserControllerIntegrationTest {
     @Test
     public void whenPutUser_thenReturnJsonUser() throws Exception {
 
-        User updateUser = new User("Barrie", "Bakkers", "barrieb@gmail.be", "bb@gmail.be-0000");
+        User updateUser = new User("Barrie", "Bakkers",
+                "barrieb@gmail.be", "bb@gmail.be-0000");
 
         mockMvc.perform(put("/users")
                 .content(mapper.writeValueAsString(updateUser))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
+
                 .andExpect(jsonPath("$.firstName", is("Barrie")))
                 .andExpect(jsonPath("$.lastName", is("Bakkers")))
                 .andExpect(jsonPath("$.email", is("barrieb@gmail.be")))
