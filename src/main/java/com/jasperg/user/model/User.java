@@ -30,11 +30,12 @@ public class User {
         this.code = email + "-" + Helper.getRandomString(4);
     }
 
-    public User(String firstName, String lastName, String email, String codeString) {
+    public User(String firstName, String lastName, String email, String code) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.code = email + "-" + codeString;
+        this.code = code;
+//        this.code = email + "-" + codeString; Causes problems when changing e-mail
     }
 
     public String getFirstName() {

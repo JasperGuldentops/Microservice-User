@@ -15,16 +15,16 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @PostConstruct
-    public void fillDB() {
-        if(userRepository.count() == 0) {
-            userRepository.save(new User("Jasper", "Guldentops", "jg@gmail.com", "0000"));
-            userRepository.save(new User("Andre", "Arboon", "aa@gmail.com", "0000"));
-            userRepository.save(new User("Barry", "Bakker", "bb@gmail.com", "0000"));
-            userRepository.save(new User("Conny", "Cunters", "cc@gmail.com", "0000"));
-
-        }
-    }
+//    @PostConstruct
+//    public void fillDB() {
+//        if(userRepository.count() == 0) {
+//            userRepository.save(new User("Jasper", "Guldentops", "jg@gmail.com", "0000"));
+//            userRepository.save(new User("Andre", "Arboon", "aa@gmail.com", "0000"));
+//            userRepository.save(new User("Barry", "Bakker", "bb@gmail.com", "0000"));
+//            userRepository.save(new User("Conny", "Cunters", "cc@gmail.com", "0000"));
+//
+//        }
+//    }
 
     @GetMapping("/users")
     public List<User> getUsers() {
